@@ -46,9 +46,9 @@ public class UsuarioController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.cadastrarUsuario(usuario));
 	}
 	
-	@DeleteMapping ("/deleteuser")
+	@DeleteMapping ("/delete")
 	public void delete (@PathVariable long id) {
-		repository.deleteAll();
+		repository.deleteById(id);
 	}
 	
 }
