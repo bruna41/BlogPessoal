@@ -25,18 +25,18 @@ public class UsuarioService {
 		
 	}
 	
-	public Optional<UserLogin> logar (Optional<UserLogin> user) {
+	public Optional<UserLogin> logar (Optional<UserLogin> usuarioL) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		Optional<Usuario> usuario = repository.findByUsuario(user.get().getUsuario());
+		Optional<Usuario> usuario = repository.findByUsuario(usuarioL.get().getUsuario());
 		
 		if (usuario.isPresent()) {
-			if (encoder.matches(user.get().getSenha(), usuario.get().getSenha())) {
-				String auth = user.get().getUsuario() + ":" + user.get().getSenha();
+			if (encoder.matches(usuarioL.get().getSenha(), usuario.get().getSenha())) {
+				String auth = usuarioL.get().getUsuario() + ":" + usuarioL.get().getSenha();
 				byte [] encodeAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
 				String authHeader = "Basic " + new String (encodeAuth);
-				user.get().setToken(authHeader);
-				user.get().setNome(usuario.get().getNome());
-				return user;
+				usuarioL.get().setToken(authHeader);
+				usuarioL.get().setNome(usuario.get().getNome());
+				return usuarioL;
 			}
 		}
 		return null;

@@ -13,9 +13,9 @@ public class UserDatailsImplement implements UserDetails {
 	private String userName;
 	private String password;
 	
-	public UserDatailsImplement (Usuario user) {
-		this.userName = user.getUsuario();
-		this.password = user.getSenha();
+	public UserDatailsImplement (Usuario usuario) {
+		this.userName = usuario.getUsuario();
+		this.password = usuario.getSenha();
 	}
 	
 	public UserDatailsImplement () {
