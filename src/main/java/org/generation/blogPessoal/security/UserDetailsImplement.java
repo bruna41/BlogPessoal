@@ -1,30 +1,31 @@
 package org.generation.blogPessoal.security;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.generation.blogPessoal.model.Usuario;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class UserDatailsImplement implements UserDetails {
-	
+public class UserDetailsImplement implements UserDetails {
+
+	/**
+	 *
+	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private String userName;
 	private String password;
-	
-	public UserDatailsImplement (Usuario usuario) {
-		this.userName = usuario.getUsuario();
+	private List<GrantedAuthority> authorities;
+
+	public UserDetailsImplement(Usuario usuario) {
+		this.userName= usuario.getUsuario();
 		this.password = usuario.getSenha();
-	}
-	
-	public UserDatailsImplement () {
-		
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		return authorities;
 	}
 
 	@Override

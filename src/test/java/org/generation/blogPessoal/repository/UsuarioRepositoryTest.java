@@ -24,11 +24,11 @@ public class UsuarioRepositoryTest {
 	
 	@BeforeAll
 	void start () {
-		userRepositoryTest.save(new Usuario (0L, "Bruna Bergami", "bruna@email.com", "12345"));
-		userRepositoryTest.save(new Usuario (0L, "Bianca Rocha", "bianca@email.com", "12345"));
-		userRepositoryTest.save(new Usuario (0L, "Pedro Bergami", "pedro@email.com", "12345"));
-		userRepositoryTest.save(new Usuario (0L, "Otavio Bergami", "otavio@email.com", "12345"));
-		userRepositoryTest.save(new Usuario (0L, "Joel Moraes", "joel@email.com", "12345"));
+		userRepositoryTest.save(new Usuario (0L, "Bruna Bergami", "bruna@email.com", "ae3eaf4", "1234567"));
+		userRepositoryTest.save(new Usuario (1L, "Bianca Rocha", "bianca@email.com", "ae3eaf4", "1234567"));
+		userRepositoryTest.save(new Usuario (2L, "Pedro Bergami", "pedro@email.com", "ae3eaf4", "1234567"));
+		userRepositoryTest.save(new Usuario (3L, "Otavio Bergami", "otavio@email.com", "ae3eaf4", "1234567"));
+		userRepositoryTest.save(new Usuario (4L, "Joel Moraes", "joel@email.com",  "ae3eaf4", "1234567"));
 	}
 	
 

@@ -33,6 +33,10 @@ public class SwaggerConfig {
 							.description("GitHub")
 							.url("https://github.com/bruna41/BlogPessoal"));
 	}
+		
+	private ApiResponse createApiResponse (String message) {
+		return new ApiResponse().description(message); 
+	}
 	
 	@Bean
 	public OpenApiCustomiser customerGlobalHeaderOpenApiCustomiser () {
@@ -46,14 +50,10 @@ public class SwaggerConfig {
 				apiResponses.addApiResponse("204", createApiResponse("Objeto Excluído!"));
 				apiResponses.addApiResponse("400", createApiResponse("Erro na Requisição!"));
 				apiResponses.addApiResponse("401", createApiResponse("Acesso Não Autorizado!"));
-				apiResponses.addApiResponse("404", createApiResponse("Objeto Não Encontrado!"));
+				apiResponses.addApiResponse("404", createApiResponse("Requisição Não Encontrada!"));
 				apiResponses.addApiResponse("500", createApiResponse("Erro na Aplicação!"));
 			}));
 		};
-	}
-
-	private ApiResponse createApiResponse (String message) {
-		return new ApiResponse().description(message); 
 	}
 
 }
