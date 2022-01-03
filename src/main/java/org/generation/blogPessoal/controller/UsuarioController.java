@@ -63,7 +63,7 @@ public class UsuarioController {
 			.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
 	}
 	
-	@DeleteMapping ("/delete")
+	@DeleteMapping ("/delete/{id}")
 	public void delete (@PathVariable Long id) {
 		repository.deleteById(id);
 	}
