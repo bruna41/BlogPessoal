@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
-@SpringBootTest (webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class UsuarioRepositoryTest {
 
@@ -23,20 +23,20 @@ public class UsuarioRepositoryTest {
 	private UsuarioRepository userRepositoryTest;
 	
 	@BeforeAll
-	void start () {
+	void start() {
 		userRepositoryTest.save(new Usuario (0L, "Bruna Bergami", "bruna@email.com", "ae3eaf4", "1234567"));
-		userRepositoryTest.save(new Usuario (1L, "Bianca Rocha", "bianca@email.com", "ae3eaf4", "1234567"));
-		userRepositoryTest.save(new Usuario (2L, "Pedro Bergami", "pedro@email.com", "ae3eaf4", "1234567"));
-		userRepositoryTest.save(new Usuario (3L, "Otavio Bergami", "otavio@email.com", "ae3eaf4", "1234567"));
-		userRepositoryTest.save(new Usuario (4L, "Joel Moraes", "joel@email.com",  "ae3eaf4", "1234567"));
+		userRepositoryTest.save(new Usuario (0L, "Bianca Rocha", "bianca@email.com", "ae3eaf4", "1234567"));
+		userRepositoryTest.save(new Usuario (0L, "Pedro Bergami", "pedro@email.com", "ae3eaf4", "1234567"));
+		userRepositoryTest.save(new Usuario (0L, "Otavio Bergami", "otavio@email.com", "ae3eaf4", "1234567"));
+		userRepositoryTest.save(new Usuario (0L, "Joel Moraes", "joel@email.com",  "ae3eaf4", "1234567"));
 	}
 	
 
 	@Test
 	@DisplayName ("Return one user")
 	public void returnOneUser () {
-		Optional<Usuario> user = userRepositoryTest.findByUsuario("bruna@email.com");
-		assertTrue(user.get().getUsuario().equals("bruna@email.com"));
+		Optional<Usuario> usuario = userRepositoryTest.findByUsuario("bruna@email.com");
+		assertTrue(usuario.get().getUsuario().equals("bruna@email.com"));
 	}
 
 	@Test
@@ -45,8 +45,8 @@ public class UsuarioRepositoryTest {
 		List<Usuario> listUser = userRepositoryTest.findAllByNomeContainingIgnoreCase("Bergami");
 		assertEquals(3, listUser.size());
 		assertTrue(listUser.get(0).getNome().equals("Bruna Bergami"));
-		assertTrue(listUser.get(2).getNome().equals("Pedro Bergami"));
-		assertTrue(listUser.get(3).getNome().equals("Otavio Bergami"));
+		assertTrue(listUser.get(1).getNome().equals("Pedro Bergami"));
+		assertTrue(listUser.get(2).getNome().equals("Otavio Bergami"));
 		
 	}
 	
