@@ -40,14 +40,23 @@ public class UsuarioService {
 	}
 	
 	public Optional<UserLogin> logarUsuario(Optional<UserLogin> usuarioLogin) {
+
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Optional<Usuario> usuario = repository.findByUsuario(usuarioLogin.get().getUsuario());
+		
 		if (usuario.isPresent()) {
-			if (compararSenhas(usuarioLogin.get().getSenha(), usuario.get().getSenha())) {
+			if (encoder.matches(usuarioLogin.get().getSenha(), usuario.get().getSenha())) {
+			
+				String auth = usuarioLogin.get().getUsuario() + ":" + usuarioLogin.get().getSenha();
+				byte[] encodeAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
+				String authHeader = "Basic " + new String(encodeAuth);
+				
+				usuarioLogin.get().setToken(authHeader);
 				usuarioLogin.get().setId(usuario.get().getId());
 				usuarioLogin.get().setNome(usuario.get().getNome());
 				usuarioLogin.get().setFoto(usuario.get().getFoto());
 				usuarioLogin.get().setSenha(usuario.get().getSenha());
-				usuarioLogin.get().setToken(generatorBasicToken(usuarioLogin.get().getUsuario(), usuarioLogin.get().getSenha()));
+				usuarioLogin.get().setTipo(usuario.get().getTipo());
 				return usuarioLogin;
 			}
 		}
@@ -61,14 +70,4 @@ public class UsuarioService {
 		return senhaEncoder;
 	}
 
-	private boolean compararSenhas(String senhaDigitada, String senhaBanco) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		return encoder.matches(senhaDigitada, senhaBanco);
-	}
-
-	private String generatorBasicToken(String email, String password) {
-		String structure = email + ":" + password;
-		byte[] structureBase64 = Base64.encodeBase64(structure.getBytes(Charset.forName("US-ASCII")));
-		return "Basic " + new String(structureBase64);
-	}
 }
